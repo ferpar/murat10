@@ -51,6 +51,8 @@ function TreeChart({ data }) {
         return length;
       })
       .transition()
+      .duration(500)
+      .delay(linkObj => linkObj.source.depth * 500)
       .attr("stroke-dashoffset", 0)
 
     //labels
