@@ -31,7 +31,7 @@ function App() {
   return <React.Fragment>
     <TreeChart data={data}/>
     <br/>
-    <button onClick={() => setData(data.map(initialData.children[0]))}>Update Data</button>
+    <button onClick={() => setData(initialData.children[0])}>Update Data</button>
     </React.Fragment>;
 }
 

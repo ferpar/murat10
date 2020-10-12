@@ -35,13 +35,35 @@ function TreeChart({ data }) {
 
     //links
     svg
-      .selectAll(".links")
+      .selectAll(".link")
       .data(root.links())
       .join("path")
       .attr("class", "link")
       .attr("fill", "none")
       .attr("stroke", "black")
       .attr("d", linkGenerator)
+      .attr("stroke-dasharray", function() {
+        const length = this.getTotalLength(); 
+        return `${length} ${length}`;
+      })
+      .attr("stroke-dashoffset", function() {
+        const length = this.getTotalLength();
+        return length;
+      })
+      .transition()
+      .attr("stroke-dashoffset", 0)
+
+    //labels
+    svg
+      .selectAll(".label")
+      .data(root.descendants())
+      .join("text")
+      .attr("class", "label")
+      .text(node => node.data.name)
+      .attr("text-anchor", "middle")
+      .attr("font-size", 24)
+      .attr("x", node => node.y)
+      .attr("y", node => node.x - 20)
 
   }, [data, dimensions])
 
