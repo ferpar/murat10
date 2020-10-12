@@ -1,3 +1,3 @@
-# Responsive Animated Bar Chart
+# Animated Tree Chart
 
-This time, we add a ResizeObserver to the mix to make the Bar Chart adapt to changes in the viewport.
+Using d3 and React to create an animated tree chart. Also used the ResizeObserver API to efficiently update on resize events.
