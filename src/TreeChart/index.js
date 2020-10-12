@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { select, hierarchy, tree, linkVertical } from "d3";
+import { select, hierarchy, tree, linkHorizontal } from "d3";
 import useResizeObserver from "../ResizeObserver";
 
 function TreeChart({ data }) {
@@ -12,15 +12,15 @@ function TreeChart({ data }) {
     if(!dimensions) return;
 
     const root = hierarchy(data);
-    const treeLayout = tree().size([dimensions.width, dimensions.height])
+    const treeLayout = tree().size([dimensions.height, dimensions.width])
     treeLayout(root);
 
     console.log(root.descendants());
     console.log(root.links());
 
-    const linkGenerator = linkVertical()
-      .x(node => node.x)
-      .y(node => node.y);
+    const linkGenerator = linkHorizontal()
+      .x(node => node.y)
+      .y(node => node.x);
 
     //nodes
     svg
@@ -30,10 +30,10 @@ function TreeChart({ data }) {
       .attr("class", "node")
       .attr("r", 4)
       .attr("fill", "black")
-      .attr("cx", node => node.x)
-      .attr("cy", node => node.y)
+      .attr("cx", node => node.y)
+      .attr("cy", node => node.x)
 
-    //lnks
+    //links
     svg
       .selectAll(".links")
       .data(root.links())
