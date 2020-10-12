@@ -32,6 +32,11 @@ function TreeChart({ data }) {
       .attr("fill", "black")
       .attr("cx", node => node.y)
       .attr("cy", node => node.x)
+      .attr("opacity", 0)
+      .transition()
+      .duration(500)
+      .delay(node => node.depth * 500)
+      .attr("opacity", 1)
 
     //links
     svg
@@ -66,6 +71,11 @@ function TreeChart({ data }) {
       .attr("font-size", 24)
       .attr("x", node => node.y)
       .attr("y", node => node.x - 20)
+      .attr("opacity", 0)
+      .transition()
+      .duration(500)
+      .delay(node => node.depth * 500)
+      .attr("opacity", 1)
 
   }, [data, dimensions])
 
